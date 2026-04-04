@@ -7,15 +7,27 @@ pragma solidity ^0.8.30;
 /// @notice Performs basic arithmetic operations
 /// @dev tores the last result and emit events for every single operation
 contract CalculatorVW3 {
+
     /// @notice Stores the last result calculated
     uint256 public lastResult;
-
+    address internal owner;
+    
     /// @notice Stores operation types
     enum Operation {
         ADDITION,
         SUBTRACTION,
         MULTIPLICATION,
-        DIVISION
+        DIVISION,
+        POWER
+    }
+
+    constructor(address owner_){
+        owner = owner_;
+    }
+
+    modifier onlyAdmin{
+        require(owner == msg.sender, "Only owner!");
+        _;
     }
 
     ///@notice Revert if the divisor of a division is zero
@@ -88,6 +100,7 @@ contract CalculatorVW3 {
             result_
         );
     }
+
     /// @notice Performs the division of two numbers
     /// @dev Reverts divisions by zero (divisor_ = 0)
     /// @param dividend_ number being divided
@@ -107,5 +120,18 @@ contract CalculatorVW3 {
             divisor_,
             result_
         );
+    }
+
+    function power(uint256 base_, uint256 power_) public  returns(uint256 result){
+        result = base_ ** power_;
+        lastResult = result;
+        emit OperationPerformed(
+            msg.sender,
+            Operation.POWER,
+            base_,
+            power_,
+            result
+        );
+
     }
 }
