@@ -26,14 +26,22 @@ contract CalculatorVW3 {
     }
 
     modifier onlyAdmin{
-        require(owner == msg.sender, "Only owner!");
+        _onlyAdmin();
         _;
     }
 
     ///@notice Revert if the divisor of a division is zero
-    modifier DivisionByZero(uint256 divisor) {
-        if (divisor == 0) revert();
+    modifier divisionByZero(uint256 divisor_) {
+        _divisionByZero(divisor_);
         _;
+    }
+
+    function _onlyAdmin() internal view {
+        require(owner == msg.sender, "Only owner!");        
+    }
+
+    function _divisionByZero(uint256 divisor_) internal  pure{
+        if (divisor_ == 0) revert();
     }
 
     /// @notice Emitted event after calculation
@@ -109,7 +117,7 @@ contract CalculatorVW3 {
     function division(
         uint256 dividend_,
         uint256 divisor_
-    ) public DivisionByZero(divisor_) returns (uint256 result_) {
+    ) public divisionByZero(divisor_) returns (uint256 result_) {
         result_ = dividend_ % divisor_;
 
         lastResult = result_;
@@ -122,7 +130,7 @@ contract CalculatorVW3 {
         );
     }
 
-    function power(uint256 base_, uint256 power_) public  returns(uint256 result){
+    function power(uint256 base_, uint256 power_) external onlyAdmin returns(uint256 result){
         result = base_ ** power_;
         lastResult = result;
         emit OperationPerformed(
