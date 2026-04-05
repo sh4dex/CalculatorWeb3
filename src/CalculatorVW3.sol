@@ -10,7 +10,7 @@ contract CalculatorVW3 {
 
     /// @notice Stores the last result calculated
     uint256 public lastResult;
-    address internal owner;
+    address public owner;
     
     /// @notice Stores operation types
     enum Operation {
