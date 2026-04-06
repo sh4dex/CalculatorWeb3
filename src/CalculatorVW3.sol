@@ -118,7 +118,7 @@ contract CalculatorVW3 {
         uint256 dividend_,
         uint256 divisor_
     ) public divisionByZero(divisor_) returns (uint256 result_) {
-        result_ = dividend_ % divisor_;
+        result_ = dividend_ / divisor_;
 
         lastResult = result_;
         emit OperationPerformed(
