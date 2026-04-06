@@ -113,7 +113,7 @@ contract CalculatorVW3 {
     /// @dev Reverts divisions by zero (divisor_ = 0)
     /// @param dividend_ number being divided
     /// @param divisor_ fraction to divide
-    /// @return result_ Returns division of dividend_ and divisor_
+    /// @return result_ Returns division of dividend_ and divisor_ Rounded to lowest number
     function division(
         uint256 dividend_,
         uint256 divisor_

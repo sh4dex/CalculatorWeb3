@@ -9,6 +9,7 @@ contract CalculatorTestVW3 is Test{
 
     CalculatorVW3 calculator;
     address owner = vm.addr(1);
+    address normalUser = vm.addr(2);
 
     function setUp() public {
         calculator = new CalculatorVW3(owner);
@@ -47,6 +48,25 @@ contract CalculatorTestVW3 is Test{
         assert(calculator.division(x_, y_) == x_ / y_ );
     }
 
+    // Permission address
+
+    function testPowerUserNotAllowed() public{
+        uint256 x_ = 5;
+        uint256 y_ = 2;
+        vm.startPrank(normalUser);
+        vm.expectRevert();
+        calculator.power(x_,y_);
+        vm.startPrank(normalUser);
+    }
+
+    function testPowerUserAuthorized() public {
+        uint256 x_ = 5;
+        uint256 y_ = 2;
+        vm.startPrank(owner);
+        assert(calculator.power(x_,y_) == x_ ** y_);
+        vm.startPrank(owner);
+    }
+
     // ******************
     // REVERT UNIT TESTS
     // ******************
@@ -65,13 +85,4 @@ contract CalculatorTestVW3 is Test{
         calculator.multiplication(x_,y_);
     }
 
-    //TODO: use address for owner access control testing
-    //coverage 70% >
-
-
-//     function testPower() public{
-//         uint256 x_ = 7;
-//         uint256 y_ = 2;
-//         assert(calculator.power(x_,y_) == x_ * y_ );
-//     }
-// }
+}
