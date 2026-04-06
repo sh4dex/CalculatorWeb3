@@ -30,6 +30,15 @@ contract CalculatorVW3 {
         _;
     }
 
+    modifier ensureNoUnderflow(uint256 minuend_, uint256 subtrahend_) {
+        _ensureNoUnderflow(minuend_, subtrahend_);
+        _;
+    }
+
+    function _ensureNoUnderflow(uint256 minuend_, uint256 subtrahend_) internal  pure{
+        require(minuend_ >= subtrahend_, "Can't substract a number bigger than the other!");
+    }
+
     ///@notice Revert if the divisor of a division is zero
     modifier divisionByZero(uint256 divisor_) {
         _divisionByZero(divisor_);
@@ -60,7 +69,7 @@ contract CalculatorVW3 {
     function subtraction(
         uint256 minuend_,
         uint256 subtrahend_
-    ) public returns (uint256 result_) {
+    ) public ensureNoUnderflow(minuend_, subtrahend_) returns (uint256 result_)  {
         result_ = minuend_ - subtrahend_;
 
         lastResult = result_;

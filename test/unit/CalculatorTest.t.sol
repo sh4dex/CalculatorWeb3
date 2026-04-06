@@ -3,7 +3,7 @@
 pragma solidity ^0.8.30;
 
 import {Test} from "forge-std/Test.sol";
-import {CalculatorVW3} from "../src/CalculatorVW3.sol";
+import {CalculatorVW3} from "../../src/CalculatorVW3.sol";
 
 contract CalculatorTestVW3 is Test{
 
@@ -18,8 +18,6 @@ contract CalculatorTestVW3 is Test{
     function testCheckAdmin() public view {
         assert(calculator.owner() == owner);       
     }
-
-    //TODO: Write unit test for every single  OPERATION
 
     // **********************
     // VALIDATION UNIT TESTS
