@@ -5,8 +5,7 @@ pragma solidity ^0.8.30;
 import {Test} from "forge-std/Test.sol";
 import {CalculatorVW3} from "../../src/CalculatorVW3.sol";
 
-contract CalculatorTestVW3 is Test{
-
+contract CalculatorTestVW3 is Test {
     CalculatorVW3 calculator;
     address owner = vm.addr(1);
     address normalUser = vm.addr(2);
@@ -15,7 +14,11 @@ contract CalculatorTestVW3 is Test{
         calculator = new CalculatorVW3(owner);
     }
 
-    //fuzzing testing
+    /**
+     * @notice Fuzzig testing just as int the  unit tests
+     * from /test/unit
+     *
+     */
     function testFuzzingDivision(uint256 x_, uint256 y_) public {
         vm.assume(y_ != 0);
         assertEq(calculator.division(x_, y_), x_ / y_);
@@ -32,7 +35,7 @@ contract CalculatorTestVW3 is Test{
     }
 
     function testSubstraction(uint256 x_, uint256 y_) public {
-        vm.assume(x_ >= y_ );
+        vm.assume(x_ >= y_);
         assertEq(calculator.subtraction(x_, y_), x_ - y_);
     }
 }
