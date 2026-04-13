@@ -6,7 +6,11 @@ The contract keeps track of the most recent calculation result and emits an even
 
 This project was built using the **Foundry** smart contract development framework using core Solidity concept and best practices including: *Smart contract structure, Events, Enums, Modifiers, State variables, NatSpec documentation, Foundry project organization, Unit testing*
 
+Created using Solidity version 0.8.33
+
 ## ⚙️ Contract Features
+
+Contract interaction:
 
 ![Diagram](./diagrams/ContractInteractionDiagram.png)
 

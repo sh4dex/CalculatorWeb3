@@ -1,6 +1,6 @@
 //SPDX-License-Identifier:MIT
 
-pragma solidity ^0.8.30;
+pragma solidity 0.8.33;
 
 /**
  * @title Calculator W3
@@ -89,7 +89,7 @@ contract CalculatorVW3 {
      * @notice Subtract two numbers
      * @param minuend_ the number
      * @param subtrahend_ the num
-     * @return substraction of minuend_ and  subtrahend_
+     * @return result_ substraction of minuend_ and  subtrahend_
      */
     function subtraction(uint256 minuend_, uint256 subtrahend_)
         public
@@ -106,7 +106,7 @@ contract CalculatorVW3 {
      * @notice Sums two numbers
      * @param addend1_ first amount
      * @param addend2_ second amount
-     * @return the sum of added1_ and added2_
+     * @return result_ The sum of added1_ and added2_
      */
     function addition(uint256 addend1_, uint256 addend2_) public returns (uint256 result_) {
         result_ = addend1_ + addend2_;
@@ -144,8 +144,8 @@ contract CalculatorVW3 {
 
     /**
      * @notice Perfom power operation of two numbers
-     * @param base_
-     * @param power_
+     * @param base_ Base number
+     * @param power_ power or exponent
      * @dev only admin can execute this function
      */
     function power(uint256 base_, uint256 power_) external onlyAdmin returns (uint256 result) {
